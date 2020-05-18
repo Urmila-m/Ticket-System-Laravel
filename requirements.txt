@@ -1,0 +1,4 @@
+php 7.2 or higher
+composer
+MySQL database
+XAMPP
