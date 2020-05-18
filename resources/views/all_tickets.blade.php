@@ -1,6 +1,12 @@
-@extends('welcome')
+@extends('layouts.app')
 
-@section('contentBlock')
+@if($allOrMy=='allTickets')
+    @section('all_tickets', 'active')
+@else
+    @section('my_tickets', 'active')
+@endif
+
+@section('content')
     <div class="container col-md-8 col-md-offset-2">
         @if(session('status'))
             <div class="alert alert-success">{!! session('status') !!}</div>

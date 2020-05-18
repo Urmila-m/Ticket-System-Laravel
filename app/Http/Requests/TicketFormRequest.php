@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 
 class TicketFormRequest extends FormRequest
 {
@@ -13,7 +14,12 @@ class TicketFormRequest extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        if (Auth::check()){
+            return true;
+        }
+        else{
+            return false;
+        }
     }
 
     /**

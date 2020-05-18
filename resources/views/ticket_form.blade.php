@@ -1,6 +1,7 @@
-@extends('welcome')
+@extends('layouts.app')
 
-@section('contentBlock')
+@section('ticket_form', 'active')
+@section('content')
     <div class="container col-md-8 col-md-offset-2">
         <div class="well well bs-component">
             <form class="form-horizontal" method="POST">
@@ -24,13 +25,24 @@
                     <div class="form-group">
                         <label for="title" class="col-lg-2 control-label">Title</label>
                         <div class="col-lg-10">
-                            <input type="text" class="form-control" id="title" name="title" placeholder="Title" @yield('titleText', 'placeholder="Title"')>
+                            <input type="text" class="form-control" id="title" name="title" placeholder="Title" @yield('titleText')>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="content" class="col-lg-2 control-label">Content</label>
                         <div class="col-lg-10">
                             <textarea type="text" class="form-control" id="content" name="content" placeholder="Content">@yield('ticketContent')</textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-lg-3 col-lg-offset-2">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="status" id="status" @yield('statusPending')>
+                                <label class="form-check-label" for="status">
+                                    \t Answered?
+                                </label>
+                            </div>
                         </div>
                     </div>
 

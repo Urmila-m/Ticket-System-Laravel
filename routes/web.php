@@ -11,22 +11,13 @@
 |
 */
 
-Route::get('/home', 'ViewController@home');//using controller which contains the business logic
-
-Route::get('/about', function () {//using closure function(function without a name), for usecase where not much work needs to be done.
-    return view('about');
-});
-
-Route::get('/contacts', function () {
-    return view('contacts');
-});
-
 Route::group(['middleware' => ['web']], function (){
     Route::get('/ticket_form', 'TicketsController@create');
     Route::post('/ticket_form', 'TicketsController@store');
 });
 
-Route::get('/all_tickets', 'TicketsController@index');
+Route::get('/all_tickets', 'TicketsController@index')->name('allTickets');
+Route::get('/my_tickets', 'TicketsController@myTickets')->name('myTickets');
 
 Route::get('/ticket/{slug?}', 'TicketsController@show');
 
@@ -37,18 +28,14 @@ Route::group(['middleware' => ['web']], function(){
 
 Route::get('/ticket/{slug}/delete', 'TicketsController@delete');
 
-Route::get('/send_email', function (){
+//middleware('auth') can be added here to allow only authorized user or it can be added in the controller
+Route::post('/comment', 'CommentsController@newComment')->middleware('auth');
 
-    $data = array(
-        "name" => "My name is Urmila.",
-    );
+Auth::routes();
 
-    \Illuminate\Support\Facades\Mail::send('email_successful', $data, function ($message){
-        $message->from('urmi.mhrz@gmail.com', 'Learning Laravel');
-        $message->to('urmi.mhrz@gmail.com')->subject('Learning Laravel test message');
-    });
-    return "Your email has been sent successfully.";
-});
+Route::get('/home', 'HomeController@index')->name('home');
 
-Route::post('/comment', 'CommentsController@newComment');
+Route::get('/welcome', 'Controller@welcome')->name('welcome');
+
+Route::get('/', 'Controller@welcome');
 

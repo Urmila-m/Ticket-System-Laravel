@@ -18,8 +18,12 @@ class CreateTicketsTable extends Migration
             $table->timestamps();
             $table->string('title', 100);//lineString, multiLineString, etc..
             $table->text('content');
-            $table->integer('user_id')->default(1);
-            $table->boolean('status')->default(true);
+
+//            without authentication
+//            $table->integer('user_id')->default(1);
+
+            $table->integer('user_id');
+            $table->boolean('status');
             $table->string('slug')->nullable();
         });
     }

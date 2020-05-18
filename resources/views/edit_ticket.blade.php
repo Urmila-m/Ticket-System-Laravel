@@ -9,4 +9,11 @@
 @section('ticketContent'){!! $ticket->content !!}
 @endsection
 
+@section('statusPending')
+    @if($ticket->status)
+        checked
+    @endif
+@endsection
+
+
 @section('okButton', 'Update')
